@@ -1,6 +1,5 @@
 package com.example.demo5new.service.user;
 
-import com.example.demo5new.certification.SelfCertification;
 import com.example.demo5new.common.converters.ProviderUserConverter;
 import com.example.demo5new.common.converters.ProviderUserRequest;
 import com.example.demo5new.domain.Role;
@@ -25,8 +24,8 @@ public class CustomUserDetailsService extends AbstractOAuth2UserService implemen
     private final AccountRepository accountRepository;
     private final RoleRepository roleRepository;
 
-    public CustomUserDetailsService(UserService userService, AccountRepository accountRepository, RoleRepository roleRepository, SelfCertification certification, ProviderUserConverter<ProviderUserRequest, ProviderUser> providerUserConverter) {
-        super(userService, accountRepository, certification, providerUserConverter);
+    public CustomUserDetailsService(UserService userService, AccountRepository accountRepository, RoleRepository roleRepository, ProviderUserConverter<ProviderUserRequest, ProviderUser> providerUserConverter) {
+        super(userService, accountRepository, providerUserConverter);
         this.accountRepository = accountRepository;
         this.roleRepository = roleRepository;
     }
@@ -52,8 +51,6 @@ public class CustomUserDetailsService extends AbstractOAuth2UserService implemen
 
         ProviderUserRequest providerUserRequest = new ProviderUserRequest(account);
         ProviderUser providerUser = providerUser(providerUserRequest);
-
-        selfCertificate(providerUser);
 
         return new PrincipalUser(providerUser);
     }

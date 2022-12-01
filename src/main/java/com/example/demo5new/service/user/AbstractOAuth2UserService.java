@@ -1,6 +1,5 @@
 package com.example.demo5new.service.user;
 
-import com.example.demo5new.certification.SelfCertification;
 import com.example.demo5new.common.converters.ProviderUserConverter;
 import com.example.demo5new.common.converters.ProviderUserRequest;
 import com.example.demo5new.domain.user.Account;
@@ -19,12 +18,7 @@ public abstract class AbstractOAuth2UserService {
 
     private final UserService userService;
     private final AccountRepository accountRepository;
-    private final SelfCertification certification;
     private final ProviderUserConverter<ProviderUserRequest, ProviderUser> providerUserConverter;
-
-    public void selfCertificate(ProviderUser providerUser){
-        certification.checkCertification(providerUser);
-    }
 
     public void register(ProviderUser providerUser, OAuth2UserRequest userRequest){
 

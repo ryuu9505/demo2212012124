@@ -38,7 +38,6 @@ public class HomeController {
 
             model.addAttribute("user", providerUser.getUsername());
             model.addAttribute("provider", providerUser.getProvider());
-            if(!principalUser.providerUser().isCertificated()) view = "selfcert";
         }
 
         return view;

@@ -1,6 +1,5 @@
 package com.example.demo5new.service.user;
 
-import com.example.demo5new.certification.SelfCertification;
 import com.example.demo5new.common.converters.ProviderUserConverter;
 import com.example.demo5new.common.converters.ProviderUserRequest;
 import com.example.demo5new.domain.users.PrincipalUser;
@@ -19,8 +18,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class CustomOAuth2UserService extends AbstractOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
 
-    public CustomOAuth2UserService(UserService userService, AccountRepository accountRepository, SelfCertification certification, ProviderUserConverter<ProviderUserRequest, ProviderUser> providerUserConverter) {
-        super(userService, accountRepository, certification, providerUserConverter);
+    public CustomOAuth2UserService(UserService userService, AccountRepository accountRepository, ProviderUserConverter<ProviderUserRequest, ProviderUser> providerUserConverter) {
+        super(userService, accountRepository, providerUserConverter);
     }
 
     @Override
@@ -34,10 +33,6 @@ public class CustomOAuth2UserService extends AbstractOAuth2UserService implement
 
         ProviderUserRequest providerUserRequest = new ProviderUserRequest(clientRegistration,oAuth2User);
         ProviderUser providerUser = providerUser(providerUserRequest);
-
-        // 본인인증 체크
-        // 기본은 본인인증을 하지 않은 상태임
-        selfCertificate(providerUser);
 
         super.register(providerUser, userRequest);
 
