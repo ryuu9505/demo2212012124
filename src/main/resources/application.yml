@@ -1,0 +1,34 @@
+spring:
+  profiles:
+    default: "ops"
+    active: "dev"
+    include: db,security
+---
+server:
+  port: 8080
+spring:
+  config:
+    activate:
+      on-profile: "ops"
+  mvc:
+    static-path-pattern: /static/**
+---
+server:
+  port: 8081
+spring:
+  config:
+    activate:
+      on-profile: "dev"
+  mvc:
+    static-path-pattern: /static/**
+---
+server:
+  port: 8082
+spring:
+  config:
+    activate:
+      on-profile: "test"
+  mvc:
+    static-path-pattern: /static/**
+
+

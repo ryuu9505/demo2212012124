@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+<div sec:authorize="isAnonymous()">
+    <form th:action="@{/login_proc}" method="post">
+        <div th:if="${error}">
+            <span class="alert alert-danger" th:text="${exception}"></span>
+        </div>
+        <div>
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username">
+        </div>
+        <div>
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password">
+        </div>
+        <div>
+            <label for="remember-me">Remember me</label>
+            <input type="checkbox" name="remember-me" id="remember-me">
+        </div>
+        <div>
+            <button type="submit">Login</button>
+        </div>
+    </form>
+    <div>
+        <a th:href="@{/oauth2/authorization/google}" style="color:red">
+            <span>Sign in with Google</span>
+        </a>
+        <a th:href="@{/oauth2/authorization/naver}" style="color:green">
+            <span>Sign in with NAVER</span>
+        </a>
+        <a th:href="@{/oauth2/authorization/kakao}" style="color:gold">
+            <span>Sign in with kakao</span>
+        </a>
+    </div>
+</div>
+</body>
+</html>
